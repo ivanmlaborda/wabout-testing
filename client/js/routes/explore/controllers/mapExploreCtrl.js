@@ -58,7 +58,7 @@
           angular.extend($scope, {
             userView: $scope.userView
           })
-          $scope.addMarkers($scope.userCoords.lat, $scope.userCoords.lng)
+          // $scope.addMarkers($scope.userCoords.lat, $scope.userCoords.lng)
         })
     }, 2000)
 
