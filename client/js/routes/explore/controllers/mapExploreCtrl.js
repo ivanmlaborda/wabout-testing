@@ -62,7 +62,7 @@
         })
     }, 2000)
 
-    const socket = io.connect('http://localhost:3008')
+    const socket = io.connect()
     socket.on('connect', function(data) {
       socket.emit('join', 'Hello World from client')
     })

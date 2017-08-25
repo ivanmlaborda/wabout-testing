@@ -5,7 +5,7 @@ const http = require('http')
 
 const app = express()
 const server = http.createServer(app)
-const io = sio(server)
+const io = sio.listen(server)
 const pathPublic = path.join(process.cwd(), 'client')
 
 const PORT = process.env.PORT || 3008
@@ -30,6 +30,12 @@ io.on('connection', function (client) {
 
   })
 })
+
+// 
+// sio.configure(function () {
+//   sio.set("transports", ["xhr-polling"])
+//   sio.set("polling duration", 10)
+// })
 
 server.listen(PORT, () => `Listening on Port ${PORT}`)
 console.log(`Listening on Port ${PORT}`)
