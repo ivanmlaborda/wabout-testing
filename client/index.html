@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Wabout">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Spinnaker|Quicksand:300,400,500,700">
+  <title>Wabout</title>
+</head>
+<body>
+
+  <div class="main-container">
+
+    <!-- ng-include header -->
+    <div ng-include='"js/includes/notLoggedHeader/template.html"' ng-hide="logged"></div>
+    <div ng-include='"js/includes/loggedHeader/template.html"' ng-show="logged"></div>
+
+    <!-- ng-view -->
+    <ng-view>
+    </ng-view>
+
+    <!-- ng-include footer -->
+    <div ng-include='"js/includes/notLoggedFooter/template.html"' ng-hide="logged"></div>
+    <div ng-include='"js/includes/loggedFooter/template.html"' ng-show="logged"></div>
+
+  </div>
+
+  <!-- jQuery -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- socket.io -->
+  <script src="bower_components/socket.io-client/dist/socket.io.js"></script>
+  <!-- Angular -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <!-- Leaflet -->
+  <script src="bower_components/leaflet/dist/leaflet.js"></script>
+  <!-- Angular simple logger -->
+  <!-- <script src="bower_components/angular-simple-logger/dist/angular-simple-logger.min.js"></script> -->
+  <!-- Angular-Leaflet-Directive -->
+  <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+  <!-- Main APP -->
+  <script src="js/app.js"></script>
+  <!-- SERVICES CONTROLLERS -->
+  <script src="js/services/GeolocateService.js"></script>
+
+  <!-- WELCOME CONTROLLERS -->
+  <script src="js/routes/welcome/index.js"></script>
+  <script src="js/routes/welcome/controllers/mapCtrl.js"></script>
+  <!-- AUTH LOGIN CONTROLLERS -->
+  <script src="js/routes/auth/login/index.js"></script>
+  <script src="js/routes/auth/login/controllers/formLoginCtrl.js"></script>
+  <!-- AUTH REGISTER CONTROLLERS -->
+  <script src="js/routes/auth/register/index.js"></script>
+  <script src="js/routes/auth/register/controllers/formRegisterCtrl.js"></script>
+  <!-- AUTH LOGOUT CONTROLLERS -->
+  <script src="js/routes/auth/logout/index.js"></script>
+  <script src="js/routes/auth/logout/controllers/logoutCtrl.js"></script>
+  <!-- EXPLORE CONTROLLERS -->
+  <script src="js/routes/explore/index.js"></script>
+  <script src="js/routes/explore/controllers/mapExploreCtrl.js"></script>
+  <!-- CONTACTS CONTROLLERS -->
+  <script src="js/routes/contacts/index.js"></script>
+  <script src="js/routes/contacts/controllers/contactsCtrl.js"></script>
+  <!-- GROUPS CONTROLLERS -->
+  <script src="js/routes/groups/index.js"></script>
+  <script src="js/routes/groups/controllers/groupsCtrl.js"></script>
+  <!-- SETTINGS CONTROLLERS -->
+  <script src="js/routes/settings/index.js"></script>
+  <script src="js/routes/settings/controllers/settingsCtrl.js"></script>
+
+
+</body>
+</html>
