@@ -31,7 +31,7 @@
             lat: lat,
             lng: lng,
             focus: true,
-            message: "You're here!",
+            message: "Is here!",
             icon: {
               iconUrl: '/img/001-signs-1.png',
               iconSize: [48, 48],
@@ -43,6 +43,25 @@
       })
     }
 
+    // $scope.addUsersMarkers = function (lat, lng) {
+    //   angular.extend($scope, {
+    //     markers: {
+    //       meMarker: {
+    //         lat: lat,
+    //         lng: lng,
+    //         focus: true,
+    //         message: "User is here!",
+    //         icon: {
+    //           iconUrl: '/img/002-signs.png',
+    //           iconSize: [48, 48],
+    //           iconAnchor: [24, 48],
+    //           popupAnchor: [0, -48]
+    //         }
+    //       }
+    //     }
+    //   })
+    // }
+
     setInterval(() => {
       GeolocateService.getGeolocation()
         .then(userCoords => {
@@ -53,7 +72,7 @@
 
           $scope.$apply(() => {
             $scope.userView = GeolocateService.setUserView(userCoords, $scope.userView.zoom)
-            console.log($scope.userView)
+            // console.log($scope.userView)
           })
           angular.extend($scope, {
             userView: $scope.userView
@@ -72,7 +91,7 @@
     })
 
     socket.on('updateCoords', function(data) {
-      console.log('Geolocation received from new client')
+      console.log('Geolocation received from client!')
       $scope.addMarkers(data.lat, data.lng)
     })
 

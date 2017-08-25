@@ -17,7 +17,7 @@
       maxZoom: 19
     }).addTo(map)
 
-    let samplePoint = L.marker([41.598, 0.629]).addTo(map);
+    let samplePoint = L.marker([41.598, 0.629]).addTo(map)
 
     // L.tileLayer('http://{s}.tile.openstreetmap.se/hydda/full/{z}/{x}/{y}.png', {
     //   attribution: 'Tiles courtesy of <a href="http://openstreetmap.se/" target="_blank">OpenStreetMap Sweden</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
