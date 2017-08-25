@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3008
 
 app.use(express.static(pathPublic))
 
-let usersLocation = {}
+let usersLocation = []
 
 io.on('connection', function (client) {
   console.log('Client connected...')
@@ -22,13 +22,12 @@ io.on('connection', function (client) {
     console.log(data)
     io.emit('serverMsg', 'Hi from the server')
   })
-  client.on('myCoords', function (data) {
+  client.on('userCoords', function (data) {
+    data.id = client.id
     console.log(data)
-    console.log(client.id)
     io.emit('serverMsg', 'Data arrive to server')
-    // usersLocation.user = data.name
-    // usersLocation.user = data.name
-    // usersLocation.user = data.name
+    io.sockets.emit('updateCoords', data)
+
   })
 })
 

@@ -7,8 +7,6 @@
     $rootScope.logged = true
     console.log('mapExploreCtrl Loaded')
 
-    let userName = 'pako'
-
     angular.extend($scope, {
       userView: {
         lat: 0,
@@ -49,8 +47,10 @@
       GeolocateService.getGeolocation()
         .then(userCoords => {
           $scope.userCoords = userCoords
-          $scope.userCoords.user = userName
-          socket.emit('myCoords', $scope.userCoords)
+          if ($scope.share) {
+            socket.emit('userCoords', $scope.userCoords)
+          }
+
           $scope.$apply(() => {
             $scope.userView = GeolocateService.setUserView(userCoords, $scope.userView.zoom)
             console.log($scope.userView)
@@ -68,9 +68,24 @@
     })
 
     socket.on('serverMsg', function(data) {
-        console.log(data)
+      console.log(data)
     })
 
+    socket.on('updateCoords', function(data) {
+      console.log('Geolocation received from new client')
+      $scope.addMarkers(data.lat, data.lng)
+    })
+
+    $scope.share = false
+
+    $scope.shareLocation = () => {
+      $scope.share = true
+      console.log("You're being tracked")
+    }
+    $scope.hideLocation = () => {
+      $scope.share = false
+      console.log("You're hide")
+    }
 
 
 

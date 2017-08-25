@@ -1,4 +1,7 @@
 <div ng-controller="mapExploreCtrl" class="map-container">
   <!-- <div id="map" class="map"></div> -->
-  <leaflet class="map" lf-center="userView" defaults="defaults" markers="markers"></leaflet>
+  <leaflet class="map" lf-center="userView" defaults="defaults" markers="markers">
+    <button type="button" class="btn btn-success emit-button" ng-click="shareLocation()" ng-hide="share">Share</button>
+    <button type="button" class="btn btn-success emit-button" ng-click="hideLocation()" ng-show="share">Hide</button>
+  </leaflet>
 </div>
