@@ -8,7 +8,7 @@ const server = http.createServer(app)
 const io = sio(server)
 const pathPublic = path.join(process.cwd(), 'client')
 
-const PORT = process.env.PORT || 3008
+const PORT = process.env.PORT
 
 // const routerMap = require('./routes/map')
 
