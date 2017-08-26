@@ -4,12 +4,21 @@
   height: 85vh;
   width: 100%;
   position: relative;
-  .emit-button {
+  .custom-map-buttons {
     position:absolute;
-    top: 25px;
-    left: 25px;
+    top: 10px;
+    left: 10px;
     z-index: 20;
+    opacity: 0.7;
+
+    .sync-button {
+      font-weight: bold;
+    }
+    .emit-button {
+      font-weight: bold;
+    }
   }
+
   .map {
     height: 100%;
     width: 100%;

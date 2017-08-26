@@ -16,22 +16,26 @@ app.use(express.static(pathPublic))
 
 let usersLocation = []
 
-io.on('connection', function (client) {
+io.on('connection', function (socket) {
   console.log('Client connected...')
-  client.on('join', function (data) {
+  socket.on('join', function (data) {
     console.log(data)
     io.emit('serverMsg', 'Hi from the server')
   })
-  client.on('userCoords', function (data) {
-    data.id = client.id
+  socket.on('userCoords', function (data) {
+    // const { lat, lng, acr} = data
+    // const {id} = socket
+    // data.id = socketId
+    data.id = socket.id
     console.log(data)
     io.emit('serverMsg', 'Data arrive to server')
-    io.sockets.emit('updateCoords', data)
+    // io.sockets.emit('updateCoords', data)
+    socket.broadcast.emit('updateCoords', data)
 
   })
 })
 
-// 
+//
 // sio.configure(function () {
 //   sio.set("transports", ["xhr-polling"])
 //   sio.set("polling duration", 10)
