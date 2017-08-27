@@ -8,6 +8,7 @@
 
     $scope.sync = true
     $scope.share = false
+    $scope.markers = []
 
     console.log('mapExploreCtrl Loaded')
 
@@ -29,42 +30,89 @@
     })
 
     $scope.addMeMarker = function (lat, lng) {
-      angular.extend($scope, {
-        markers: {
-          meMarker: {
-            lat: lat,
-            lng: lng,
-            focus: true,
-            message: "You're here!",
-            icon: {
-              iconUrl: '/img/red-marker.png',
-              iconSize: [34, 48],
-              iconAnchor: [17, 48],
-              popupAnchor: [0, -48]
+      $scope.markers.shift()
+      $scope.markers.unshift(
+        {
+          lat: lat,
+          lng: lng,
+          id: 'me',
+          focus: false,
+          title: 'Marker',
+          message: 'You are here!',
+          label: {
+            message: 'You',
+            options: {
+              noHide: true
             }
+          },
+          icon: {
+            iconUrl: '/img/red-marker.png',
+            iconSize: [34, 48],
+            iconAnchor: [17, 48],
+            popupAnchor: [0, -48]
           }
         }
-      })
+      )
     }
 
-    $scope.addUsersMarkers = function (lat, lng) {
-      angular.extend($scope, {
-        markers: {
-          meMarker: {
-            lat: lat,
-            lng: lng,
-            focus: true,
-            message: `user is here!`,
-            icon: {
-              iconUrl: '/img/blue-marker.png',
-              iconSize: [34, 48],
-              iconAnchor: [17, 48],
-              popupAnchor: [0, -48]
+    $scope.addUsersMarkers = function (lat, lng, id) {
+      $scope.markers = $scope.markers.filter((userMarker) => {
+        return userMarker.id !== id
+      })
+      $scope.markers.push(
+        {
+          lat: lat,
+          lng: lng,
+          id: id,
+          focus: false,
+          label: `${id} is here!`,
+          icon: {
+            iconUrl: '/img/blue-marker.png',
+            iconSize: [34, 48],
+            iconAnchor: [17, 48],
+            popupAnchor: [0, -48]
             }
           }
-        }
-      })
-    }
+        )
+      }
+
+    // $scope.addMeMarker = function (lat, lng) {
+    //   angular.extend($scope, {
+    //     markers: {
+    //       meMarker: {
+    //         lat: lat,
+    //         lng: lng,
+    //         focus: true,
+    //         message: "You're here!",
+    //         icon: {
+    //           iconUrl: '/img/red-marker.png',
+    //           iconSize: [34, 48],
+    //           iconAnchor: [17, 48],
+    //           popupAnchor: [0, -48]
+    //         }
+    //       }
+    //     }
+    //   })
+    // }
+
+    // $scope.addUsersMarkers = function (lat, lng) {
+    //   angular.extend($scope, {
+    //     markers: {
+    //       usersMarker: {
+    //         lat: lat,
+    //         lng: lng,
+    //         focus: true,
+    //         message: `user is here!`,
+    //         icon: {
+    //           iconUrl: '/img/blue-marker.png',
+    //           iconSize: [34, 48],
+    //           iconAnchor: [17, 48],
+    //           popupAnchor: [0, -48]
+    //         }
+    //       }
+    //     }
+    //   })
+    // }
 
     setInterval(() => {
       if ($scope.sync) {
@@ -82,7 +130,7 @@
             angular.extend($scope, {
               userView: $scope.userView
             })
-            $scope.addMeMarker($scope.userCoords.lat, $scope.userCoords.lng)
+            $scope.addMeMarker($scope.userCoords.lat, $scope.userCoords.lng, $scope.userCoords.id)
           })
       }
     }, 2000)
@@ -98,7 +146,7 @@
 
     client.on('updateCoords', function (data) {
       console.log('Geolocation received from user!')
-      $scope.addUsersMarkers(data.lat, data.lng)
+      $scope.addUsersMarkers(data.lat, data.lng, data.id)
     })
 
     $scope.shareLocation = () => {
@@ -118,6 +166,10 @@
       $scope.sync = false
       $scope.share = false
       console.log('Your position is not sync. You can not view your position in the map or be tracked by any user')
+    }
+
+    $scope.showMarkers = () => {
+      console.log($scope.markers)
     }
 
 

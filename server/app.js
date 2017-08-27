@@ -35,11 +35,5 @@ io.on('connection', function (socket) {
   })
 })
 
-//
-// sio.configure(function () {
-//   sio.set("transports", ["xhr-polling"])
-//   sio.set("polling duration", 10)
-// })
-
 server.listen(PORT, () => `Listening on Port ${PORT}`)
 console.log(`Listening on Port ${PORT}`)
